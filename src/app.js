@@ -9,6 +9,10 @@ const rateLimit = require('express-rate-limit')
 
 const app = express()
 
+// Confiar en el proxy de Vercel — necesario para que express-rate-limit
+// lea correctamente la IP real desde X-Forwarded-For
+app.set('trust proxy', 1)
+
 // Middleware
 const allowedOrigins = process.env.NODE_ENV === 'production'
   ? ['https://habit-tracker-api.vercel.app']
